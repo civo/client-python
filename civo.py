@@ -31,7 +31,9 @@ class Civo:
 
     class Ssh:
         """
-        Class to handle all ssh operation
+        To manage the SSH keys for an account that are used for logging in to instances,
+        there are a set of APIs for listing the SSH public keys currently stored,
+        as well as adding and removing them by name.
         """
         def __init__(self, headers):
             self.headers = headers
@@ -91,7 +93,7 @@ class Civo:
 
     class Instances:
         """
-        Class to handle all instances operation
+        Instances are running virtual servers on the Civo cloud platform. They can be of variable size.
         """
         def __init__(self, headers):
             self.headers = headers
@@ -294,7 +296,8 @@ class Civo:
 
     class Networks:
         """
-        Class to handle all Networks operation
+        To manage the private networks for an account, there are a set of APIs for listing them, as well as adding,
+        renaming and removing them by ID.
         """
         def __init__(self, headers):
             self.headers = headers
