@@ -515,3 +515,14 @@ class Civo:
             r = requests.post(self.url, headers=self.headers, params=payload)
 
             return r.json()
+
+        def list(self) -> object:
+            """
+            Function to list firewalls
+            :return: object json
+            """
+            r = requests.get(self.url, headers=self.headers)
+
+            return r.json()
+
+        
