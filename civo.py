@@ -4,7 +4,12 @@ import requests
 
 class Civo:
 
-    def __init__(self, civo_token=None):
+    def __init__(self, civo_token: str = None):
+        """
+        Init for Civo class
+        :param civo_token: str, optional the token generate by civo
+        """
+
         # Get token from env or pass to the class
         if not civo_token:
             self.token = os.getenv('CIVO_TOKEN', False)
