@@ -28,6 +28,7 @@ class Civo:
         self.networks = self.Networks(self.headers)
         self.snapshots = self.Snapshots(self.headers)
         self.volumes = self.Volumes(self.headers)
+        self.firewalls = self.Firewall(self.headers)
 
     class Ssh:
         """
@@ -485,5 +486,32 @@ class Civo:
             :return: object json
             """
             r = requests.delete(self.url + '/{}'.format(id), headers=self.headers)
+
+            return r.json()
+
+    class Firewall:
+        """
+        The simplest solution for most customers is to configure a firewall within their
+        Instances using either iptables which is powerful or Uncomplicated Firewall/ufw
+        which is much simpler but only works on Ubuntu.
+
+        As an another option, customers can configure custom firewall rules for their
+        instances using the Firewall API which adjusts the security group for your network
+        of instances. These are a freely configurable option, however customers
+        should be careful to not lock out their access to the instances.
+        """
+
+        def __init__(self, headers):
+            self.headers = headers
+            self.url = 'https://api.civo.com/v2/firewalls'
+
+        def create(self, name: str) -> object:
+            """
+            Function to create a new firewall
+            :param name: A unique name for this firewall within your account
+            :return: object json
+            """
+            payload = {'name': name}
+            r = requests.post(self.url, headers=self.headers, params=payload)
 
             return r.json()
