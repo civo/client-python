@@ -32,7 +32,9 @@ civo = Civo('token')
 ssh_file = open('~/.ssh/id_dsa.pub').read()
 
 civo.ssh.create(name='default', public_key=ssh_file)
-civo.instances.create(hostname='text.example.com', size='g2.xsmall', region='lon1', template_id='f80a1698-8933-414f-92ac-a36d9cfc4ac9', public_ip='true', ssh_key='default')
+civo.instances.create(hostname='text.example.com', size='g2.xsmall', 
+                      region='lon1', template_id='f80a1698-8933-414f-92ac-a36d9cfc4ac9',
+                      public_ip='true', ssh_key='default')
 ```
 
 The API library consists of a handful of classes that implement the Civo API. There is full documentation on the API available at https://api.civo.com/doc/.
