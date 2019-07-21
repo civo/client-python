@@ -13,7 +13,7 @@ class Civo:
 
         # Create headers for all requests to civo api
         if not self.token:
-            raise Exception('CIVO_TOKEN not found in the enviroment')
+            raise Exception('CIVO_TOKEN not found in the enviroment or is not declared in the class')
 
         self.headers = {'Authorization': 'bearer {}'.format(self.token)}
 
@@ -29,7 +29,7 @@ class Civo:
             self.headers = headers
             self.url = 'https://api.civo.com/v2/sshkeys'
 
-        def uploading(self, name: str, public_key: str) -> object:
+        def create(self, name: str, public_key: str) -> object:
             """
             Function to uploading a SSH public key
             :param name: Name of the key
@@ -41,7 +41,7 @@ class Civo:
 
             return r.json()
 
-        def listing(self) -> object:
+        def list(self) -> object:
             """
             Function to listing the SSH public keys
             :return: object json
@@ -72,7 +72,7 @@ class Civo:
 
             return r.json()
 
-        def removing(self, id: str) -> object:
+        def delete(self, id: str) -> object:
             """
             Function to removing a SSH key
             :return: object json
@@ -278,6 +278,55 @@ class Civo:
             """
             Function to deleting an instance
             :param id: id of the objects
+            :return: object json
+            """
+            r = requests.delete(self.url + '/{}'.format(id), headers=self.headers)
+
+            return r.json()
+
+    class Networks:
+        """
+        Class to handle all Networks operation
+        """
+        def __init__(self, headers):
+            self.headers = headers
+            self.url = 'https://api.civo.com/v2/networks'
+
+        def create(self, label: str) -> object:
+            """
+            Function to create a private network
+            :param label: a string that will be the displayed name/reference for the network.
+            :return: object json
+            """
+            payload = {'label': label}
+            r = requests.post(self.url, headers=self.headers, params=payload)
+
+            return r.json()
+
+        def list(self) -> object:
+            """
+            Function to listing the private networks
+            :return: object json
+            """
+            r = requests.get(self.url, headers=self.headers)
+
+            return r.json()
+
+        def rename(self, id: str, label: str) -> object:
+            """
+            Function to renaming a network
+            :param id: id of the objects
+            :param label: the new label to use.
+            :return: object json
+            """
+            payload = {'label': label}
+            r = requests.put(self.url + '/{}'.format(id), headers=self.headers, params=payload)
+
+            return r.json()
+
+        def delete(self, id: str) -> object:
+            """
+            Function to removing a private network
             :return: object json
             """
             r = requests.delete(self.url + '/{}'.format(id), headers=self.headers)
