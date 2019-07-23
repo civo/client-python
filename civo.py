@@ -1,5 +1,6 @@
 import os
 import requests
+from utils import filter_list
 
 
 class Civo:
@@ -315,12 +316,18 @@ class Civo:
 
             return r.json()
 
-        def list(self) -> object:
+        def list(self, filter: str = None) -> object:
             """
             Function to listing the private networks
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
             :return: object json
             """
             r = requests.get(self.url, headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
 
             return r.json()
 
@@ -527,5 +534,3 @@ class Civo:
             r = requests.get(self.url, headers=self.headers)
 
             return r.json()
-
-        
