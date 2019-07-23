@@ -30,6 +30,7 @@ class Civo:
         self.snapshots = self.Snapshots(self.headers)
         self.volumes = self.Volumes(self.headers)
         self.firewalls = self.Firewall(self.headers)
+        self.dns = self.Dns(self.headers)
 
     class Ssh:
         """
@@ -53,12 +54,18 @@ class Civo:
 
             return r.json()
 
-        def list(self) -> object:
+        def lists(self, filter: str = None) -> object:
             """
             Function to listing the SSH public keys
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
             :return: object json
             """
             r = requests.get(self.url, headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
 
             return r.json()
 
@@ -167,13 +174,15 @@ class Civo:
 
             return r.json()
 
-        def list(self, tags: str = None, page: str = None, per_page: str = None) -> object:
+        def lists(self, tags: str = None, page: str = None, per_page: str = None, filter: str = None) -> object:
             """
             Functikon to list all instances
             :param tags: a space separated list of tags, to be used freely as required.
                    If multiple are supplied, instances must much all tags to be returned (not one or more)
             :param page: which page of results to return (defaults to 1)
             :param per_page: how many instances to return per page (defaults to 20)
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+               you can filter by any object that is inside the json
             :return: objects json
             """
             payload = {}
@@ -188,6 +197,10 @@ class Civo:
                 payload['per_page'] = per_page
 
             r = requests.get(self.url, headers=self.headers, params=payload)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
 
             return r.json()
 
@@ -316,12 +329,21 @@ class Civo:
 
             return r.json()
 
-        def list(self, filter: str = None) -> object:
+        def lists(self, filter: str = None) -> object:
             """
             Function to listing the private networks
             :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
                            you can filter by any object that is inside the json
-            :return: object json
+            :return: [
+                      {
+                        "id": "50f2fffa-f81e-4e96-830f-e78f7e565e6f",
+                        "name": "example-ltd-a775-development-75362452-562f-4b70-a65a-aeb4d4cd6864",
+                        "region": "lon1",
+                        "default": false,
+                        "cidr": "0.0.0.0/0",
+                        "label": "development"
+                      }
+                    ]
             """
             r = requests.get(self.url, headers=self.headers)
 
@@ -393,12 +415,18 @@ class Civo:
 
             return r.json()
 
-        def list(self) -> object:
+        def lists(self, filter: str = None) -> object:
             """
             Function to list snapshots
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
             :return: object json
             """
             r = requests.get(self.url, headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
 
             return r.json()
 
@@ -443,12 +471,18 @@ class Civo:
 
             return r.json()
 
-        def list(self) -> object:
+        def lists(self, filter: str = None) -> object:
             """
             Function to list volumes
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
             :return: object json
             """
             r = requests.get(self.url, headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
 
             return r.json()
 
@@ -479,7 +513,7 @@ class Civo:
 
             return r.json()
 
-        def attach(self, id: str) -> object:
+        def detach(self, id: str) -> object:
             """
             Function to detach a volume from an instance
             :param id: id of the objects
@@ -526,11 +560,225 @@ class Civo:
 
             return r.json()
 
-        def list(self) -> object:
+        def lists(self, filter: str = None) -> object:
             """
             Function to list firewalls
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
             :return: object json
             """
             r = requests.get(self.url, headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
+
+            return r.json()
+
+        def delete(self, id: str) -> object:
+            """
+            Function to deleting a firewall
+            :param id: id of the firewall object
+            :return: object json
+            """
+            r = requests.delete(self.url + '/{}'.format(id), headers=self.headers)
+
+            return r.json()
+
+        def create_rule(self, id: str, start_port: str, protocol: str = 'tcp', end_port: str = None, cidr: str = '0.0.0.0/0',
+                   direction: str = 'inbound', label: str = None) -> object:
+            """
+            An account holder can create firewall rules for a specific firewall, but there is a quota'd limit
+            to the number of rules that can be created, but generally this is much higher than most customers
+            will require and it can be increased if required.
+            :param id: Firewall id object
+            :param protocol: the protocol choice from tcp, udp or icmp (the default if unspecified is tcp)
+            :param start_port: the start of the port range to configure for this rule (or the single port if required)
+            :param end_port: the end of the port range (this is optional, by default it will only apply to the single
+                   port listed in start_port)
+            :param cidr: the IP address of the other end (i.e. not your instance) to affect, or a valid network CIDR
+                         (defaults to being globally applied, i.e. 0.0.0.0/0)
+            :param direction: will this rule affect inbound or outbound traffic (by default this is inbound)
+            :param label: a string that will be the displayed name/reference for this rule (optional)
+            :return: object json
+            """
+            payload = {'protocol': protocol, 'start_port': start_port, 'cidr': cidr, 'direction': direction}
+
+            if end_port:
+                payload['end_port'] = end_port
+
+            if label:
+                payload['label'] = label
+
+            r = requests.post(self.url + '/{}/rules'.format(id), headers=self.headers, params=payload)
+
+            return r.json()
+
+        def lists_rule(self, id: str, filter: str = None) -> object:
+            """
+            Function to list firewalls rules
+            :param id: Firewall id object
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
+            :return: object json
+            """
+            r = requests.get(self.url + '/{id}/rules'.format(id), headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
+
+            return r.json()
+
+        def delete_rule(self, id: str, rule_id: str) -> object:
+            """
+            Function to deleting a firewall rule
+            :param id: id of the firewall object
+            :param rule_id: id of the firewall rule object
+            :return: object json
+            """
+            r = requests.delete(self.url + '/{}/rules/{}'.format(id, rule_id), headers=self.headers)
+
+            return r.json()
+
+    class Dns:
+        """
+        We host reverse DNS for all instances automatically. If you'd like to manage forward (normal)
+        DNS for your domains, you can do that for free within your account. This API is effectively split
+        in to two parts: 1) Managing domain names themselves, and 2) Managing records within those domain names.
+        We don't offer registration of domains names, this is purely for hosting the DNS.
+        If you're looking to buy a domain name, we recommend LCN.com for their excellent friendly support
+        and very competitive prices.
+        """
+        def __init__(self, headers):
+            self.headers = headers
+            self.url = 'https://api.civo.com/v2/dns'
+
+        def create(self, name: str) -> object:
+            """
+            Function to setup a new domain
+            :param name: the domain name, e.g. "example.com"
+            :return: object json
+            """
+            payload = {'name': name}
+            r = requests.post(self.url, headers=self.headers, params=payload)
+
+            return r.json()
+
+        def update(self, id: str, name: str) -> object:
+            """
+            Function to update a new domain
+            :param name: the domain name, e.g. "example.com"
+            :return: object json
+            """
+            payload = {'name': name}
+            r = requests.put(self.url + '/{}'.format(id), headers=self.headers, params=payload)
+
+            return r.json()
+
+        def lists(self, filter: str = None) -> object:
+            """
+            Function to list all dns domains
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
+            :return: object json
+            """
+            r = requests.get(self.url, headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
+
+            return r.json()
+
+        def delete(self, id: str) -> object:
+            """
+            Function to deleting a domain
+            :param id: id of the domain object
+            :return: object json
+            """
+            r = requests.delete(self.url + '/{}'.format(id), headers=self.headers)
+
+            return r.json()
+
+        def create_record(self, id: str, type: str, name: str, value: str, priority: str, ttl: str = '600') -> object:
+            """
+            Function to create a new DNS record
+            :param id: id of the domain object
+            :param type: the choice of RR type from (a, cname, mx or txt)
+            :param name: the portion before the domain name (e.g. www) or an @ for the apex/root domain
+                         (you cannot use an A record with an amex/root domain)
+            :param value: the IP address (A or MX), hostname (CNAME or MX) or text value (TXT) to serve for this record
+            :param priority: useful for MX records only, the priority mail should be attempted it (defaults to 10)
+            :param ttl: how long caching DNS servers should cache this record for, in seconds
+                        (the minimum is 600 and the default if unspecified is 600)
+            :return: object json
+            """
+            payload = {'type': type, 'name': name, 'value': value, 'priority': priority, 'ttl': ttl}
+            r = requests.post(self.url + '{}/records'.format(id), headers=self.headers, params=payload)
+
+            return r.json()
+
+        def update_record(self, id: str, id_record: str, type: str = None, name: str = None, value: str = None,
+                          priority: str = None,
+                          ttl: str = None) -> object:
+            """
+            Function to update a DNS record
+            :param id: id of the domain object
+            :param id_record: id of the record domain object
+            :param type: the choice of RR type from (a, cname, mx or txt)
+            :param name: the portion before the domain name (e.g. www) or an @ for the apex/root domain
+                         (you cannot use an A record with an amex/root domain)
+            :param value: the IP address (A or MX), hostname (CNAME or MX) or text value (TXT) to serve for this record
+            :param priority: useful for MX records only, the priority mail should be attempted it (defaults to 10)
+            :param ttl: how long caching DNS servers should cache this record for, in seconds
+                        (the minimum is 600 and the default if unspecified is 600)
+            :return: object json
+            """
+            payload = {}
+
+            if type:
+                payload['type'] = type
+
+            if name:
+                payload['name'] = name
+
+            if value:
+                payload['value'] = value
+
+            if priority:
+                payload['priority'] = priority
+
+            if ttl:
+                payload['ttl'] = ttl
+
+            r = requests.put(self.url + '{}/records/{}'.format(id, id_record), headers=self.headers, params=payload)
+
+            return r.json()
+
+        def lists_record(self, id: str, filter: str = None) -> object:
+            """
+            Function to list DNS records
+            :param id: Firewall object id
+            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                           you can filter by any object that is inside the json
+            :return: object json
+            """
+            r = requests.get(self.url + '{}/records'.format(id), headers=self.headers)
+
+            if filter:
+                data = r.json()
+                return filter_list(data=data, filter=filter)
+
+            return r.json()
+
+        def delete_record(self, id: str, record_id: str) -> object:
+            """
+            Function to deleting a dns record
+            :param id: id of the dns object
+            :param record_id: id of the dns record object
+            :return: object json
+            """
+            r = requests.delete(self.url + '/{}/records/{}'.format(id, record_id), headers=self.headers)
 
             return r.json()

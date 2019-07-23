@@ -14,4 +14,4 @@ def filter_list(data, filter):
     search_in = filter_split[0]
     search = filter_split[1]
 
-    return next((item for item in data if item[search_in] == search), 'Network not found in the civo cloud')
+    return next((item for item in data if item[search_in] == search), 'Object not found')
