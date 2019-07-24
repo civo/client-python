@@ -15,7 +15,7 @@ def read(filename):
 
 setup(
     name="civo",
-    version="1.0",
+    version="1.0.0",
     url="https://github.com/alejandrojnm/pymagisto",
     license='Mit',
     author="Alejandro JNM",
@@ -25,8 +25,9 @@ setup(
     packages=find_packages(exclude=('tests',)),
     install_requires=['requests'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Development Status :: 4 - Beta',
+        'License :: OSI Approved :: MIT License ',
+        'Natural Language :: English',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
