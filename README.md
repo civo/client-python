@@ -4,7 +4,7 @@ This project is the python API library for using in python projects.
 
 
 ```sh
-pip install civo
+pip3 install civo
 ```
 
 ## API Library
