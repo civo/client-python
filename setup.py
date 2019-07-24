@@ -17,7 +17,7 @@ setup(
     name="civo",
     version="1.0.0",
     url="https://github.com/alejandrojnm/pymagisto",
-    license='Mit',
+    license='MIT License',
     author="Alejandro JNM",
     author_email="alejandrojnm@gmail.com",
     description="Wrapper for civo api",
@@ -26,7 +26,7 @@ setup(
     install_requires=['requests'],
     classifiers=[
         'Development Status :: 4 - Beta',
-        'License :: OSI Approved :: MIT License ',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
