@@ -14,17 +14,16 @@ class Size:
         self.url = 'https://api.civo.com/v2/sizes'
 
     def list(self, filter: str = None) -> object:
-        def lists(self, filter: str = None) -> object:
-            """
-            Function to listing available instances sizes
-            :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
-                           you can filter by any object that is inside the json
-            :return: object json
-            """
-            r = requests.get(self.url, headers=self.headers)
+        """
+        Function to listing available instances sizes
+        :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
+                       you can filter by any object that is inside the json
+        :return: object json
+        """
+        r = requests.get(self.url, headers=self.headers)
 
-            if filter:
-                data = r.json()
-                return filter_list(data=data, filter=filter)
+        if filter:
+            data = r.json()
+            return filter_list(data=data, filter=filter)
 
-            return r.json()
+        return r.json()
