@@ -8,6 +8,9 @@ Usage
 >>> civo = Civo('token')
 >>> ssh_file = open('~/.ssh/id_dsa.pub').read()
 
+>>> # you can filter the result
+>>> size_id = civo.size.list(filter='name:g2.xsmall')[0]['id']
+
 >>> civo.ssh.create(name='default', public_key=ssh_file)
 >>> civo.instances.create(hostname='text.example.com', size='g2.xsmall',
                       region='lon1', template_id='f80a1698-8933-414f-92ac-a36d9cfc4ac9',
