@@ -16,7 +16,7 @@ def read(filename):
 setup(
     name="civo",
     version="1.0.0",
-    url="https://github.com/alejandrojnm/pymagisto",
+    url="",
     license='MIT License',
     author="Alejandro JNM",
     author_email="alejandrojnm@gmail.com",
