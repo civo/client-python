@@ -13,7 +13,7 @@ class Instances:
 
     def create(self, hostname: str, size: str, template_id: str, reverse_dns: str = None, region: str = None,
                public_ip: str = 'create', move_ip_from: str = None, count: int = 1, network_id: str = None,
-               snapshot_id: str = None, initial_user: str = None, ssh_key_id: str = None, tags: str = None) -> object:
+               snapshot_id: str = None, initial_user: str = None, ssh_key_id: str = None, tags: str = None) -> dict:
         # TODO: Pending check
         """
         Function to create instance
@@ -78,7 +78,7 @@ class Instances:
 
         return r.json()
 
-    def lists(self, tags: str = None, page: str = None, per_page: str = None, filter: str = None) -> object:
+    def lists(self, tags: str = None, page: str = None, per_page: str = None, filter: str = None) -> dict:
         """
         Functikon to list all instances
         :param tags: a space separated list of tags, to be used freely as required.
@@ -118,7 +118,7 @@ class Instances:
 
         return r.json()
 
-    def retagging(self, id: str, tags: str) -> object:
+    def retagging(self, id: str, tags: str) -> dict:
         """
         Function to retagging an instance
         :param id: id of the objects
@@ -131,7 +131,7 @@ class Instances:
 
         return r.json()
 
-    def rebooting(self, id: str, type_reboot: str) -> object:
+    def rebooting(self, id: str, type_reboot: str) -> dict:
         """
         Function to rebooting an instance
         :param id: id of the objects
@@ -142,7 +142,7 @@ class Instances:
 
         return r.json()
 
-    def stop(self, id: str) -> object:
+    def stop(self, id: str) -> dict:
         """
         Function to shutting down an instance
         :param id: id of the objects
@@ -152,7 +152,7 @@ class Instances:
 
         return r.json()
 
-    def start(self, id: str) -> object:
+    def start(self, id: str) -> dict:
         """
         Function to starting an instance after being shut down
         :param id: id of the objects
@@ -162,7 +162,7 @@ class Instances:
 
         return r.json()
 
-    def resizing(self, id: str, size: str) -> object:
+    def resizing(self, id: str, size: str) -> dict:
         """
         Function to upgrading (resizing) an instance
         :param id: id of the objects
@@ -175,7 +175,7 @@ class Instances:
 
         return r.json()
 
-    def firewall(self, id: str, firewall_id: str = None) -> object:
+    def firewall(self, id: str, firewall_id: str = None) -> dict:
         """
         Function to setting the firewall for an instance
         :param id: id of the objects
@@ -192,7 +192,7 @@ class Instances:
 
         return r.json()
 
-    def moving_ip(self, id: str, ip: str) -> object:
+    def moving_ip(self, id: str, ip: str) -> dict:
         """
         Function to moving a public IP between instances
         :param id: id of the objects
@@ -203,7 +203,7 @@ class Instances:
 
         return r.json()
 
-    def delete(self, id: str) -> object:
+    def delete(self, id: str) -> dict:
         """
         Function to deleting an instance
         :param id: id of the objects

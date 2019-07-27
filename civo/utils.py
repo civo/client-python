@@ -3,7 +3,7 @@ File to handle all utils
 """
 
 
-def filter_list(data, filter):
+def filter_list(data: dict, filter: str) -> list:
     """
     Function to handle filter in all list of the api
     :param data: object json
