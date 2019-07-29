@@ -13,7 +13,7 @@ class Charges:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/charges'
 
-    def get(self, date_from: str = None, date_to: str = None) -> object:
+    def get(self, date_from: str = None, date_to: str = None) -> dict:
         """
         Function to listing charges
         :param date_from: The from date like '2019-07-01'

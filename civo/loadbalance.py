@@ -15,7 +15,7 @@ class LoadBalance:
     def create(self):
         return 'No implemeted yet'
 
-    def lists(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to list load balancers
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -30,7 +30,7 @@ class LoadBalance:
 
         return r.json()
 
-    def delete(self, id: str) -> object:
+    def delete(self, id: str) -> dict:
         """
         Function to deleting a load balancer
         :param id: ID of the load balancer to delete

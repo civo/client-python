@@ -16,7 +16,7 @@ class Dns:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/dns'
 
-    def create(self, name: str) -> object:
+    def create(self, name: str) -> dict:
         """
         Function to setup a new domain
         :param name: the domain name, e.g. "example.com"
@@ -27,7 +27,7 @@ class Dns:
 
         return r.json()
 
-    def update(self, id: str, name: str) -> object:
+    def update(self, id: str, name: str) -> dict:
         """
         Function to update a new domain
         :param name: the domain name, e.g. "example.com"
@@ -38,7 +38,7 @@ class Dns:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to list all dns domains
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -53,7 +53,7 @@ class Dns:
 
         return r.json()
 
-    def delete(self, id: str) -> object:
+    def delete(self, id: str) -> dict:
         """
         Function to deleting a domain
         :param id: id of the domain object
@@ -63,7 +63,7 @@ class Dns:
 
         return r.json()
 
-    def create_record(self, id: str, type: str, name: str, value: str, priority: str, ttl: str = '600') -> object:
+    def create_record(self, id: str, type: str, name: str, value: str, priority: str, ttl: str = '600') -> dict:
         """
         Function to create a new DNS record
         :param id: id of the domain object
@@ -83,7 +83,7 @@ class Dns:
 
     def update_record(self, id: str, id_record: str, type: str = None, name: str = None, value: str = None,
                       priority: str = None,
-                      ttl: str = None) -> object:
+                      ttl: str = None) -> dict:
         """
         Function to update a DNS record
         :param id: id of the domain object
@@ -118,7 +118,7 @@ class Dns:
 
         return r.json()
 
-    def lists_record(self, id: str, filter: str = None) -> object:
+    def lists_record(self, id: str, filter: str = None) -> dict:
         """
         Function to list DNS records
         :param id: Firewall object id
@@ -134,7 +134,7 @@ class Dns:
 
         return r.json()
 
-    def delete_record(self, id: str, record_id: str) -> object:
+    def delete_record(self, id: str, record_id: str) -> dict:
         """
         Function to deleting a dns record
         :param id: id of the dns object

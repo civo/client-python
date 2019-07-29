@@ -12,7 +12,7 @@ class Quota:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/quota'
 
-    def get(self):
+    def get(self) -> dict:
         """
         Function to get quota
         :return: object json

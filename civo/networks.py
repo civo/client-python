@@ -12,7 +12,7 @@ class Networks:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/networks'
 
-    def create(self, label: str) -> object:
+    def create(self, label: str) -> dict:
         """
         Function to create a private network
         :param label: a string that will be the displayed name/reference for the network.
@@ -23,7 +23,7 @@ class Networks:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to listing the private networks
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -47,7 +47,7 @@ class Networks:
 
         return r.json()
 
-    def rename(self, id: str, label: str) -> object:
+    def rename(self, id: str, label: str) -> dict:
         """
         Function to renaming a network
         :param id: id of the objects
@@ -59,7 +59,7 @@ class Networks:
 
         return r.json()
 
-    def delete(self, id: str) -> object:
+    def delete(self, id: str) -> dict:
         """
         Function to removing a private network
         :return: object json
