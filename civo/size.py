@@ -13,7 +13,7 @@ class Size:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/sizes'
 
-    def list(self, filter: str = None) -> dict:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to listing available instances sizes
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
