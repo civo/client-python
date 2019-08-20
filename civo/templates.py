@@ -14,7 +14,7 @@ class Templates:
 
     def create(self, code: str, id: str = None, name: str = None, volume_id: str = None, image_id: str = None,
                short_description: str = None, description: str = None, default_username: str = None,
-               cloud_config: str = None):
+               cloud_config: str = None) -> dict:
         """
         Function to create a new template
         :param id: This is a short identifier for the template, it should be lowercase letters, dashs, underscores,
@@ -71,7 +71,7 @@ class Templates:
 
         return r.json()
 
-    def list(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to listing available templates
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -146,7 +146,7 @@ class Templates:
 
         return r.json()
 
-    def delete(self, template_id: str) -> object:
+    def delete(self, template_id: str) -> dict:
         """
         Function to deleting a template
         :param template_id: id of template to delete

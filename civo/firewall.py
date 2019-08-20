@@ -18,7 +18,7 @@ class Firewall:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/firewalls'
 
-    def create(self, name: str) -> object:
+    def create(self, name: str) -> dict:
         """
         Function to create a new firewall
         :param name: A unique name for this firewall within your account
@@ -29,7 +29,7 @@ class Firewall:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to list firewalls
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -44,7 +44,7 @@ class Firewall:
 
         return r.json()
 
-    def delete(self, id: str) -> object:
+    def delete(self, id: str) -> dict:
         """
         Function to deleting a firewall
         :param id: id of the firewall object
@@ -56,7 +56,7 @@ class Firewall:
 
     def create_rule(self, id: str, start_port: str, protocol: str = 'tcp', end_port: str = None,
                     cidr: str = '0.0.0.0/0',
-                    direction: str = 'inbound', label: str = None) -> object:
+                    direction: str = 'inbound', label: str = None) -> dict:
         """
         An account holder can create firewall rules for a specific firewall, but there is a quota'd limit
         to the number of rules that can be created, but generally this is much higher than most customers
@@ -84,7 +84,7 @@ class Firewall:
 
         return r.json()
 
-    def lists_rule(self, id: str, filter: str = None) -> object:
+    def lists_rule(self, id: str, filter: str = None) -> dict:
         """
         Function to list firewalls rules
         :param id: Firewall id object
@@ -100,7 +100,7 @@ class Firewall:
 
         return r.json()
 
-    def delete_rule(self, id: str, rule_id: str) -> object:
+    def delete_rule(self, id: str, rule_id: str) -> dict:
         """
         Function to deleting a firewall rule
         :param id: id of the firewall object

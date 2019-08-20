@@ -17,7 +17,7 @@ class Snapshots:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/snapshots'
 
-    def create(self, name: str, instance_id: str, safe: str = 'false', cron_timing: str = None) -> object:
+    def create(self, name: str, instance_id: str, safe: str = 'false', cron_timing: str = None) -> dict:
         """
         Function to create a new or update an old snapshot
         :param instance_id: The ID of the instance to snapshot
@@ -43,7 +43,7 @@ class Snapshots:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to list snapshots
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -58,7 +58,7 @@ class Snapshots:
 
         return r.json()
 
-    def delete(self, name: str) -> object:
+    def delete(self, name: str) -> dict:
         """
         Function to deleting a snapshot
         :param name: name of the instance

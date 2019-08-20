@@ -15,7 +15,7 @@ class Volumes:
         self.headers = headers
         self.url = 'https://api.civo.com/v2/volumes'
 
-    def create(self, name: str, size_gb: str, bootable: str = 'false') -> object:
+    def create(self, name: str, size_gb: str, bootable: str = 'false') -> dict:
         """
         Function to create a new volume
         :param name: A name that you wish to use to refer to this volume (required)
@@ -33,7 +33,7 @@ class Volumes:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> object:
+    def lists(self, filter: str = None) -> dict:
         """
         Function to list volumes
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
@@ -48,7 +48,7 @@ class Volumes:
 
         return r.json()
 
-    def resizing(self, id: str, size_gb: str) -> object:
+    def resizing(self, id: str, size_gb: str) -> dict:
         """
         Function to resizing a volume
         :param id: id of the objects
@@ -62,7 +62,7 @@ class Volumes:
 
         return r.json()
 
-    def attach(self, id: str, instance_id: str) -> object:
+    def attach(self, id: str, instance_id: str) -> dict:
         """
         Function to attach a volume to an instance
         :param id: id of the objects
@@ -75,7 +75,7 @@ class Volumes:
 
         return r.json()
 
-    def detach(self, id: str) -> object:
+    def detach(self, id: str) -> dict:
         """
         Function to detach a volume from an instance
         :param id: id of the objects
@@ -85,7 +85,7 @@ class Volumes:
 
         return r.json()
 
-    def delete(self, id: str) -> object:
+    def delete(self, id: str) -> dict:
         """
         Function to deleting a volume
         :param id: name of the instance
