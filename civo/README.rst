@@ -9,7 +9,7 @@ Usage
 >>> ssh_file = open('~/.ssh/id_dsa.pub').read()
 
 >>> # you can filter the result
->>> size_id = civo.size.list(filter='name:g2.xsmall')[0]['name']
+>>> size_id = civo.size.lists(filter='name:g2.xsmall')[0]['name']
 >>> template = civo.templates.lists(filter='code:debian-stretch')[0]['id']
 
 >>> civo.ssh.create(name='default', public_key=ssh_file)
