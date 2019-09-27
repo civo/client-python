@@ -19,4 +19,9 @@ def filter_list(data: dict, filter: str) -> list:
     except ValueError:
         pass
 
-    return [element for element in data if element[search_in] == search]
+    try:
+        data_search = data['items']
+    except TypeError:
+        data_search = data
+
+    return [element for element in data_search if element[search_in] == search]
