@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -43,7 +44,7 @@ class Snapshots:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to list snapshots
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

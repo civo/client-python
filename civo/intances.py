@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -78,7 +79,7 @@ class Instances:
 
         return r.json()
 
-    def lists(self, tags: str = None, page: str = None, per_page: str = None, filter: str = None) -> dict:
+    def search(self, tags: str = None, page: str = None, per_page: str = None, filter: str = None) -> dict:
         """
         Functikon to list all instances
         :param tags: a space separated list of tags, to be used freely as required.
