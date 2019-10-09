@@ -10,9 +10,9 @@ class Ssh:
     as well as adding and removing them by name.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/sshkeys'
+        self.url = 'https://{}/v2/sshkeys'.format(api_url)
 
     def create(self, name: str, public_key: str) -> dict:
         """

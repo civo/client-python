@@ -10,9 +10,9 @@ class Size:
     a combined allocation of CPU, RAM and disk.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/sizes'
+        self.url = 'https://{}/v2/sizes'.format(api_url)
 
     def search(self, filter: str = None) -> dict:
         """

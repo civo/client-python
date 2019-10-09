@@ -21,7 +21,8 @@ Install the package:
 pip install civo
 ```
 
-You need to define `CIVO_TOKEN` in the environment or when you create a instance of `civo` you can pass the token.
+You need to define `CIVO_TOKEN` in the environment or when you create a instance of `civo` you can pass the token as param, 
+also you can change the api endpoint adding to the environment `CIVO_API` by default we use `api.civo.com`
 
 Then you can use classes like this:
 

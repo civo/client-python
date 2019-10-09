@@ -15,9 +15,9 @@ class Firewall:
     should be careful to not lock out their access to the instances.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/firewalls'
+        self.url = 'https://{}/v2/firewalls'.format(api_url)
 
     def create(self, name: str) -> dict:
         """

@@ -14,9 +14,9 @@ class Snapshots:
     will overwrite itself each week not keep multiple weekly snapshots).
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/snapshots'
+        self.url = 'https://{}/v2/snapshots'.format(api_url)
 
     def create(self, name: str, instance_id: str, safe: str = 'false', cron_timing: str = None) -> dict:
         """

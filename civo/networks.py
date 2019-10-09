@@ -9,9 +9,9 @@ class Networks:
     renaming and removing them by ID.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/networks'
+        self.url = 'https://{}/v2/networks'.format(api_url)
 
     def create(self, label: str) -> dict:
         """

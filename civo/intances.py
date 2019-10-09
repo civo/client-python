@@ -8,9 +8,9 @@ class Instances:
     Instances are running virtual servers on the Civo cloud platform. They can be of variable size.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/instances'
+        self.url = 'https://{}/v2/instances'.format(api_url)
 
     def create(self, hostname: str, size: str, template_id: str, reverse_dns: str = None, region: str = None,
                public_ip: str = 'create', move_ip_from: str = None, count: int = 1, network_id: str = None,
@@ -81,7 +81,7 @@ class Instances:
 
     def search(self, tags: str = None, page: str = None, per_page: str = None, filter: str = None) -> dict:
         """
-        Functikon to list all instances
+        Function to list all instances
         :param tags: a space separated list of tags, to be used freely as required.
                If multiple are supplied, instances must much all tags to be returned (not one or more)
         :param page: which page of results to return (defaults to 1)
