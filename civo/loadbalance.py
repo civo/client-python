@@ -9,9 +9,9 @@ class LoadBalance:
     between them then you can easily launch a managed load balancer service on Civo.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/loadbalancers'
+        self.url = 'https://{}/v2/loadbalancers'.format(api_url)
 
     def create(self, backends: list, hostname: str = None, tls_certificate: str = None,
                tls_key: str = None,

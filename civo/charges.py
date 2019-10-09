@@ -1,5 +1,6 @@
-import requests
 from datetime import datetime
+
+import requests
 
 
 class Charges:
@@ -9,9 +10,9 @@ class Charges:
     IP address and snapshot the amount of hours it's in use for.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/charges'
+        self.url = 'https://{}/v2/charges'.format(api_url)
 
     def get(self, date_from: str = None, date_to: str = None) -> dict:
         """

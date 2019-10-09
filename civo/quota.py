@@ -8,9 +8,9 @@ class Quota:
     handled correctly or after a call to our offices, we can increase this quota.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/quota'
+        self.url = 'https://{}/v2/quota'.format(api_url)
 
     def get(self) -> dict:
         """

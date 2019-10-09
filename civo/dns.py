@@ -13,9 +13,9 @@ class Dns:
     and very competitive prices.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/dns'
+        self.url = 'https://{}/v2/dns'.format(api_url)
 
     def create(self, name: str) -> dict:
         """

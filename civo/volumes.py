@@ -12,9 +12,9 @@ class Volumes:
     As volume storage is chargeable, at any time these can be deleted.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/volumes'
+        self.url = 'https://{}/v2/volumes'.format(api_url)
 
     def create(self, name: str, size_gb: str, bootable: str = 'false') -> dict:
         """

@@ -11,9 +11,9 @@ class Regions:
     region if you don't care.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/regions'
+        self.url = 'https://{}/v2/regions'.format(api_url)
 
     def search(self, filter: str = None) -> dict:
         """
