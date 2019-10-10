@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -11,9 +12,9 @@ class Volumes:
     As volume storage is chargeable, at any time these can be deleted.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/volumes'
+        self.url = 'https://{}/v2/volumes'.format(api_url)
 
     def create(self, name: str, size_gb: str, bootable: str = 'false') -> dict:
         """
@@ -33,7 +34,7 @@ class Volumes:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to list volumes
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

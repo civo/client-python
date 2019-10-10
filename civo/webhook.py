@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -7,9 +8,9 @@ class WebHook:
     Open certain actions taking place within your account, we can trigger a JSON POST callback to a URL or your choice.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/webhooks'
+        self.url = 'https://{}/v2/webhooks'.format(api_url)
 
     def create(self, events: str, url: str, secret: str = None) -> dict:
         """
@@ -29,7 +30,7 @@ class WebHook:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to listing webhooks
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

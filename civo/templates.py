@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -8,9 +9,9 @@ class Templates:
     a control-panel based hosting setup or a fully setup application ready to configure for your use.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/templates'
+        self.url = 'https://{}/v2/templates'.format(api_url)
 
     def create(self, code: str, id: str = None, name: str = None, volume_id: str = None, image_id: str = None,
                short_description: str = None, description: str = None, default_username: str = None,
@@ -71,7 +72,7 @@ class Templates:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to listing available templates
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

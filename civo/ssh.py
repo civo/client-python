@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -9,9 +10,9 @@ class Ssh:
     as well as adding and removing them by name.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/sshkeys'
+        self.url = 'https://{}/v2/sshkeys'.format(api_url)
 
     def create(self, name: str, public_key: str) -> dict:
         """
@@ -25,7 +26,7 @@ class Ssh:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to listing the SSH public keys
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

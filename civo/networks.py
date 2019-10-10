@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -8,9 +9,9 @@ class Networks:
     renaming and removing them by ID.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/networks'
+        self.url = 'https://{}/v2/networks'.format(api_url)
 
     def create(self, label: str) -> dict:
         """
@@ -23,7 +24,7 @@ class Networks:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to listing the private networks
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -12,9 +13,9 @@ class Dns:
     and very competitive prices.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/dns'
+        self.url = 'https://{}/v2/dns'.format(api_url)
 
     def create(self, name: str) -> dict:
         """
@@ -38,7 +39,7 @@ class Dns:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to list all dns domains
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',

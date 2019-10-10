@@ -1,4 +1,5 @@
 import requests
+
 from .utils import filter_list
 
 
@@ -8,9 +9,9 @@ class LoadBalance:
     between them then you can easily launch a managed load balancer service on Civo.
     """
 
-    def __init__(self, headers):
+    def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://api.civo.com/v2/loadbalancers'
+        self.url = 'https://{}/v2/loadbalancers'.format(api_url)
 
     def create(self, backends: list, hostname: str = None, tls_certificate: str = None,
                tls_key: str = None,
@@ -134,7 +135,7 @@ class LoadBalance:
 
         return r.json()
 
-    def lists(self, filter: str = None) -> dict:
+    def search(self, filter: str = None) -> dict:
         """
         Function to list load balancers
         :param filter: Filter json object the format is 'id:6224cd2b-d416-4e92-bdbb-db60521c8eb9',
