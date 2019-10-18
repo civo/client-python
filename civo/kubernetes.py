@@ -11,6 +11,7 @@ class Kubernetes:
     def __init__(self, headers, api_url):
         self.headers = headers
         self.url = 'https://{}/v2/kubernetes/clusters'.format(api_url)
+        self.kube_version = 'https://{}/v2/kubernetes/versions'.format(api_url)
         self.marketplace_url = 'https://{}/v2/kubernetes/applications'.format(api_url)
 
     def create(self, name: str, num_nodes: int = 3, nodes_size: str = 'g2.small', kubernetes_version: str = None, tags: str = None) -> dict:
@@ -124,5 +125,22 @@ class Kubernetes:
         payload = {'hostname': hostname}
 
         r = requests.post(self.url + '/{}/recycle'.format(id), headers=self.headers, payload=payload)
+
+        return r.json()
+
+    def versions(self, filter: str = None) -> dict:
+        """
+        A list of versions available to install isavailable
+        :param filter: Filter json object the format is 'type:stable',
+           you can filter by any object that is inside the json
+        :return: objects dict
+        """
+        payload = {}
+
+        r = requests.get(self.kube_version, headers=self.headers, params=payload)
+
+        if filter:
+            data = r.json()
+            return filter_list(data=data, filter=filter)
 
         return r.json()
