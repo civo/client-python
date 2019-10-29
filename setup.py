@@ -15,7 +15,7 @@ def read(filename):
 
 setup(
     name="civo",
-    version="1.0.2",
+    version="1.0.1",
     url="https://github.com/civo/client-python",
     license='MIT License',
     author="Alejandro JNM",
