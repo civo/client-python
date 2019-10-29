@@ -35,7 +35,7 @@ class Civo:
         if not api_url:
             self.api_url = os.getenv('CIVO_API', False)
 
-        if not self.api_url:
+        if self.api_url:
             self.api_url = api_url
         else:
             self.api_url = 'api.civo.com'
@@ -45,7 +45,6 @@ class Civo:
             raise Exception('CIVO_TOKEN not found in the enviroment or is not declared in the class')
 
         self.headers = {'Authorization': 'bearer {}'.format(self.token)}
-        self.civo_api = api_url
 
         # int all class
         self.ssh = Ssh(self.headers, self.api_url)
