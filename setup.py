@@ -25,7 +25,7 @@ setup(
     packages=find_packages(exclude=('tests',)),
     install_requires=['requests'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python',
