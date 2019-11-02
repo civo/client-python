@@ -14,7 +14,7 @@ class Instances:
 
     def create(self, hostname: str, size: str, template_id: str, reverse_dns: str = None, region: str = None,
                public_ip: str = 'create', move_ip_from: str = None, count: int = 1, network_id: str = None,
-               snapshot_id: str = None, initial_user: str = None, ssh_key_id: str = None, tags: str = None) -> dict:
+               snapshot_id: str = None, initial_user: str = None, ssh_key_id: str = None, script: str = None, tags: str = None) -> dict:
         # TODO: Pending check
         """
         Function to create instance
@@ -39,6 +39,9 @@ class Instances:
                (optional; this will default to the template's default_username and fallback to "civo")
         :param ssh_key_id: the ID of an already uploaded SSH public key to use for login to the default user
                (optional; if one isn't provided a random password will be set and returned in the initial_password field)
+        :param script: the contents of a script that will be uploaded to /usr/local/bin/civo-user-init-script on your
+               instance, read/write/executable only by root and then will be
+               executed at the end of the cloud initialization
         :param tags: a space separated list of tags, to be used freely as required (optional)
         :return: objects json
         """
@@ -68,6 +71,9 @@ class Instances:
 
         if ssh_key_id:
             payload['ssh_key_id'] = ssh_key_id
+
+        if script:
+            payload['script'] = script
 
         if initial_user:
             payload['initial_user'] = initial_user
