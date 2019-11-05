@@ -42,7 +42,7 @@ class Civo:
 
         # Create headers for all requests to civo api
         if not self.token:
-            raise Exception('CIVO_TOKEN not found in the enviroment or is not declared in the class')
+            raise Exception('CIVO_TOKEN not found in the environment or is not declared in the class')
 
         self.headers = {'Authorization': 'bearer {}'.format(self.token)}
 
