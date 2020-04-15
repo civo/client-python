@@ -14,7 +14,8 @@ class Kubernetes:
         self.kube_version = 'https://{}/v2/kubernetes/versions'.format(api_url)
         self.marketplace_url = 'https://{}/v2/kubernetes/applications'.format(api_url)
 
-    def create(self, name: str, num_nodes: int = 3, nodes_size: str = 'g2.small', kubernetes_version: str = None, tags: str = None) -> dict:
+    def create(self, name: str, num_nodes: int = 3, nodes_size: str = 'g2.small', kubernetes_version: str = None,
+               tags: str = None) -> dict:
         """
         Function to create a cluster of kubernetes
         :param name: a name for your cluster, must be unique within your account (required)
@@ -63,10 +64,14 @@ class Kubernetes:
 
         return r.json()
 
-    def update(self, id: str, name: str = None, num_nodes: int = None, applications: str = None) -> dict:
+    def update(self, id: str, name: str = None, num_nodes: int = None, applications: str = None, version: str = None,
+               node_destroy: str = None) -> dict:
         """
         Function to update a cluster of kubernetes
-        :param applications: a comma separated list of applications to install. Spaces within application names are fine, but shouldn't be either side of the comma.
+        :param node_destroy: if you are scaling down by one, you can give a hint on the node's name to be destroyed.
+        :param version: the version of k3s to upgrade to.
+        :param applications: a comma separated list of applications to install. Spaces within application names are fine
+               but shouldn't be either side of the comma.
         :param id: id of the cluster
         :param name: the cluster's new name
         :param num_nodes: how many nodes should the cluster scale to.
@@ -79,6 +84,12 @@ class Kubernetes:
 
         if num_nodes:
             payload['num_target_nodes'] = num_nodes
+
+        if version:
+            payload['version'] = version
+
+        if node_destroy:
+            payload['node_destroy'] = node_destroy
 
         if applications:
             payload['applications'] = applications
