@@ -12,11 +12,11 @@ Usage
 >>> ssh_file = open('{}id_dsa.pub'.format(home)).read()
 ​
 >>> # you can filter the result
->>> size_id = civo.size.search(filter='name:g2.xsmall')[0]['name']
->>> template = civo.templates.search(filter='code:debian-stretch')[0]['id']
+>>> size_id = civo.size.search(filter_by='name:g2.xsmall')[0]['name']
+>>> template = civo.templates.search(filter_by='code:debian-stretch')[0]['id']
 ​
 >>> civo.ssh.create(name='default', public_key=ssh_file)
->>> ssh_id = civo.ssh.search(filter='name:default')[0]['id']
+>>> ssh_id = civo.ssh.search(filter_by='name:default')[0]['id']
 >>> civo.instances.create(hostname='text.example.com', size=size_id,
                       region='lon1', template_id=template,
                       public_ip='true', ssh_key=ssh_id)
