@@ -25,6 +25,6 @@ class Size:
 
         if filter:
             data = r.json()
-            return filter_list(data=data, filter=filter)
+            return filter_list(data=data, filter_by=filter)
 
         return r.json()

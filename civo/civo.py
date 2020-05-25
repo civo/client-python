@@ -33,12 +33,7 @@ class Civo:
 
         # Get api url from env or you can pass to the class
         if not api_url:
-            self.api_url = os.getenv('CIVO_API', False)
-
-        if self.api_url:
-            self.api_url = api_url
-        else:
-            self.api_url = 'api.civo.com'
+            self.api_url = os.getenv('CIVO_API', 'api.civo.com')
 
         # Create headers for all requests to civo api
         if not self.token:
