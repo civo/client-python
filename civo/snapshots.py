@@ -14,9 +14,10 @@ class Snapshots:
     will overwrite itself each week not keep multiple weekly snapshots).
     """
 
-    def __init__(self, headers, api_url):
+    def __init__(self, headers, api_url, region):
+        param = "?region={region}".format(region=region) if region else ''
         self.headers = headers
-        self.url = 'https://{}/v2/snapshots'.format(api_url)
+        self.url = 'https://{api_url}/v2/snapshots{param}'.format(api_url=api_url, param=param)
 
     def create(self, name: str, instance_id: str, safe: str = 'false', cron_timing: str = None) -> dict:
         """

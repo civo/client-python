@@ -15,11 +15,12 @@ from .ssh import Ssh
 from .templates import Templates
 from .volumes import Volumes
 from .webhook import WebHook
+from .utils import print_err
 
 
 class Civo:
 
-    def __init__(self, civo_token: str = None, api_url: str = None):
+    def __init__(self, civo_token: str = None, api_url: str = None, region: str = None):
         """
         Init for Civo class
         :param civo_token: str, optional the token generate by civo
@@ -35,6 +36,12 @@ class Civo:
         if not api_url:
             self.api_url = os.getenv('CIVO_API', 'api.civo.com')
 
+        if not region:
+            print_err('Using default region')
+            self.region = None
+        else:
+            self.region = region
+
         # Create headers for all requests to civo api
         if not self.token:
             raise Exception('CIVO_TOKEN not found in the environment or is not declared in the class')
@@ -43,17 +50,17 @@ class Civo:
 
         # int all class
         self.ssh = Ssh(self.headers, self.api_url)
-        self.instances = Instances(self.headers, self.api_url)
-        self.networks = Networks(self.headers, self.api_url)
-        self.snapshots = Snapshots(self.headers, self.api_url)
-        self.volumes = Volumes(self.headers, self.api_url)
-        self.firewalls = Firewall(self.headers, self.api_url)
+        self.instances = Instances(self.headers, self.api_url, self.region)
+        self.networks = Networks(self.headers, self.api_url, self.region)
+        self.snapshots = Snapshots(self.headers, self.api_url, self.region)
+        self.volumes = Volumes(self.headers, self.api_url, self.region)
+        self.firewalls = Firewall(self.headers, self.api_url, self.region)
         self.dns = Dns(self.headers, self.api_url)
-        self.loadbalance = LoadBalance(self.headers, self.api_url)
+        self.loadbalance = LoadBalance(self.headers, self.api_url, self.region)
         self.webhook = WebHook(self.headers, self.api_url)
         self.size = Size(self.headers, self.api_url)
         self.regions = Regions(self.headers, self.api_url)
         self.templates = Templates(self.headers, self.api_url)
         self.quota = Quota(self.headers, self.api_url)
         self.charges = Charges(self.headers, self.api_url)
-        self.kubernetes = Kubernetes(self.headers, self.api_url)
+        self.kubernetes = Kubernetes(self.headers, self.api_url, self.region)

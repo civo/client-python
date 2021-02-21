@@ -8,9 +8,10 @@ class Kubernetes:
     Kubernetes clusters are a number of instances on the Civo cloud platform running the Kubernetes cloud orchestration platform.
     """
 
-    def __init__(self, headers, api_url):
+    def __init__(self, headers, api_url, region):
+        param = "?region={region}".format(region=region) if region else ''
         self.headers = headers
-        self.url = 'https://{}/v2/kubernetes/clusters'.format(api_url)
+        self.url = 'https://{api_url}/v2/kubernetes/clusters{param}'.format(api_url=api_url, param=param)
         self.kube_version = 'https://{}/v2/kubernetes/versions'.format(api_url)
         self.marketplace_url = 'https://{}/v2/kubernetes/applications'.format(api_url)
 

@@ -8,9 +8,10 @@ class Instances:
     Instances are running virtual servers on the Civo cloud platform. They can be of variable size.
     """
 
-    def __init__(self, headers, api_url):
+    def __init__(self, headers, api_url, region):
+        param = "?region={region}".format(region=region) if region else ''
         self.headers = headers
-        self.url = 'https://{}/v2/instances'.format(api_url)
+        self.url = 'https://{api_url}/v2/instances{param}'.format(api_url=api_url, param=param)
 
     def create(self, hostname: str, size: str, template_id: str, reverse_dns: str = None, region: str = None,
                public_ip: str = 'create', move_ip_from: str = None, count: int = 1, network_id: str = None,
