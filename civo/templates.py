@@ -11,7 +11,7 @@ class Templates:
 
     def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://{}/v2/templates'.format(api_url)
+        self.url = '{}/v2/templates'.format(api_url)
 
     def create(self, code: str, id: str = None, name: str = None, volume_id: str = None, image_id: str = None,
                short_description: str = None, description: str = None, default_username: str = None,

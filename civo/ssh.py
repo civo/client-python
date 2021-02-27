@@ -12,7 +12,7 @@ class Ssh:
 
     def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://{}/v2/sshkeys'.format(api_url)
+        self.url = '{}/v2/sshkeys'.format(api_url)
 
     def create(self, name: str, public_key: str) -> dict:
         """

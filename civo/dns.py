@@ -15,7 +15,7 @@ class Dns:
 
     def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://{}/v2/dns'.format(api_url)
+        self.url = '{}/v2/dns'.format(api_url)
 
     def create(self, name: str) -> dict:
         """
