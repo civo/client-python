@@ -12,7 +12,7 @@ class Networks:
     def __init__(self, headers, api_url, region):
         param = "?region={region}".format(region=region) if region else ''
         self.headers = headers
-        self.url = 'https://{api_url}/v2/networks{param}'.format(api_url=api_url, param=param)
+        self.url = '{api_url}/v2/networks{param}'.format(api_url=api_url, param=param)
 
     def create(self, label: str) -> dict:
         """

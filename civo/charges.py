@@ -12,7 +12,7 @@ class Charges:
 
     def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://{}/v2/charges'.format(api_url)
+        self.url = '{}/v2/charges'.format(api_url)
 
     def get(self, date_from: str = None, date_to: str = None) -> dict:
         """

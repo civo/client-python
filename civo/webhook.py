@@ -10,7 +10,7 @@ class WebHook:
 
     def __init__(self, headers, api_url):
         self.headers = headers
-        self.url = 'https://{}/v2/webhooks'.format(api_url)
+        self.url = '{}/v2/webhooks'.format(api_url)
 
     def create(self, events: str, url: str, secret: str = None) -> dict:
         """

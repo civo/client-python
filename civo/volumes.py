@@ -15,7 +15,7 @@ class Volumes:
     def __init__(self, headers, api_url, region):
         param = "?region={region}".format(region=region) if region else ''
         self.headers = headers
-        self.url = 'https://{api_url}/v2/volumes{param}'.format(api_url=api_url, param=param)
+        self.url = '{api_url}/v2/volumes{param}'.format(api_url=api_url, param=param)
 
     def create(self, name: str, size_gb: str, bootable: str = 'false') -> dict:
         """

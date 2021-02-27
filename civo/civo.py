@@ -34,10 +34,10 @@ class Civo:
 
         # Get api url from env or you can pass to the class
         if not api_url:
-            self.api_url = os.getenv('CIVO_API', 'api.civo.com')
+            self.api_url = os.getenv('CIVO_API', 'https://api.civo.com')
 
         if not region:
-            print_err('Using default region')
+            print_err('Using Default Region')
             self.region = None
         else:
             self.region = region

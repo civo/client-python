@@ -1,0 +1,20 @@
+[
+    {
+        "id": "85a6db60-9b57-4bb3-9ab4-17334e3e0249",
+        "default": false,
+        "name": "cust-f5a8f98c-61c9-public",
+        "label": "public"
+    },
+    {
+        "id": "network_id",
+        "default": true,
+        "name": "cust-f5a8f98c-808d-default",
+        "label": "Default"
+    },
+    {
+        "id": "52732d38-4eb2-448b-82a4-f8f614f94674",
+        "default": false,
+        "name": "cust-f5a8f98c-9f33-internal",
+        "label": "internal"
+    }
+]
