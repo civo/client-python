@@ -59,4 +59,4 @@ civo = Civo('token', region='NYC1')
 civo.kubernetes.create(name='my_cluster', num_nodes=2)
 ```
 
-The API library consists of a handful of classes that implement the Civo API. There is full documentation on the API available at https://api.civo.com/doc/.
+The API library consists of a handful of classes that implement the Civo API. There is full documentation on the API available at https://www.civo.com/api.
