@@ -22,7 +22,7 @@ class Ssh:
         :return: object json
         """
         payload = {'name': name, 'public_key': public_key}
-        r = requests.post(self.url, headers=self.headers, params=payload)
+        r = requests.post(self.url, headers=self.headers, data=payload)
 
         return r.json()
 
@@ -59,7 +59,7 @@ class Ssh:
         :return: object json
         """
         payload = {'name': name}
-        r = requests.put(self.url + '/{}'.format(id), headers=self.headers, params=payload)
+        r = requests.put(self.url + '/{}'.format(id), headers=self.headers, data=payload)
 
         return r.json()
 
