@@ -35,7 +35,7 @@ Usage:
 from civo import Civo
 from os.path import expanduser
 
-civo = Civo('token', region='SVG1')
+civo = Civo('token', region='LON1')
 home = expanduser("~/.ssh/")
 ssh_file = open('{}id_dsa.pub'.format(home)).read()
 

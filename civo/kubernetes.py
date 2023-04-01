@@ -9,8 +9,6 @@ class Kubernetes:
     """
     Kubernetes clusters are a number of instances on the Civo cloud platform running the Kubernetes cloud orchestration platform.
     """
-    supported_k8s = ['NYC1', 'SVG1']
-
     def __init__(self, headers, api_url, region=None):
         self.region = region
         self.headers = headers
@@ -27,8 +25,6 @@ class Kubernetes:
         """
         region = region if region else self.region
 
-        if region is not None and region not in self.supported_k8s:
-            raise CIVOAPIError('Kubernetes is not supported in: %s' % region)
         path = path if path else ""
         query = "?region={region}".format(region=region) if region else ""
         return self.url + path + query
