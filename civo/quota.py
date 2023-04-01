@@ -12,11 +12,15 @@ class Quota:
         self.headers = headers
         self.url = '{}/v2/quota'.format(api_url)
 
-    def get(self) -> dict:
+    def get(self,name:str = None) -> dict:
         """
         Function to get quota
+        :param name: to get quota for a given account name if api key is of a system account(optional)
         :return: object json
         """
-        r = requests.post(self.url, headers=self.headers)
+        params = {}
+        if name:
+            params = {"name":name}
+        r = requests.get(self.url, headers=self.headers,params=params)
 
         return r.json()
