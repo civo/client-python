@@ -60,7 +60,7 @@ class Civo:
         self.webhook = WebHook(self.headers, self.api_url)
         self.size = Size(self.headers, self.api_url)
         self.regions = Regions(self.headers, self.api_url)
-        self.diskimage = DiskImages(self.headers, self.api_url)
+        self.diskimage = DiskImages(self.headers, self.api_url,self.region)
         self.quota = Quota(self.headers, self.api_url)
         self.charges = Charges(self.headers, self.api_url)
         self.kubernetes = Kubernetes(self.headers, self.api_url, self.region)
