@@ -14,7 +14,7 @@ class DiskImages:
         self.url = '{}/v2/disk_images'.format(api_url)
         self.region = region
 
-    def list(self) -> list[dict]:
+    def list(self) -> list:
         """
         Function to list available disk images available in a particular region
         :return: object json
