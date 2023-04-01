@@ -12,7 +12,7 @@ from .regions import Regions
 from .size import Size
 from .snapshots import Snapshots
 from .ssh import Ssh
-from .templates import Templates
+from .diskimage import DiskImages
 from .volumes import Volumes
 from .webhook import WebHook
 from .utils import print_err
@@ -60,7 +60,7 @@ class Civo:
         self.webhook = WebHook(self.headers, self.api_url)
         self.size = Size(self.headers, self.api_url)
         self.regions = Regions(self.headers, self.api_url)
-        self.templates = Templates(self.headers, self.api_url)
+        self.diskimage = DiskImages(self.headers, self.api_url)
         self.quota = Quota(self.headers, self.api_url)
         self.charges = Charges(self.headers, self.api_url)
         self.kubernetes = Kubernetes(self.headers, self.api_url, self.region)
