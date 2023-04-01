@@ -19,9 +19,12 @@ class DiskImages:
         Function to list available disk images available in a particular region
         :return: object json
         """
-        r = requests.get(self.url, headers=self.headers,params={
-            "region":self.region
-        })
+        params = {}
+        if self.region:
+            params = {
+                "region":self.region
+            } 
+        r = requests.get(self.url, headers=self.headers,params=params)
 
         return r.json()
     
@@ -31,8 +34,11 @@ class DiskImages:
         :param disk_id: Disk Id of disk of which image is to be retrieved(Note:This is region specific)
         :return: object json
         """
-        r = requests.get(self.url+"/{}".format(disk_id),headers=self.headers,params={
-            "region":self.region
-        })
+        params = {}
+        if self.region:
+            params = {
+                "region":self.region
+            } 
+        r = requests.get(self.url+"/{}".format(disk_id),headers=self.headers,params=params)
         return r.json()
 
