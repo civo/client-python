@@ -9,7 +9,7 @@ class DiskImages:
     Note:Every region will have similar set of disk images. But the disk image IDs are different.
     """
 
-    def __init__(self, headers, api_url,reigon):
+    def __init__(self, headers, api_url,region):
         self.headers = headers
         self.url = '{}/v2/disk_images'.format(api_url)
         self.region = region
