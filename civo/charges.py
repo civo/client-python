@@ -14,23 +14,26 @@ class Charges:
         self.headers = headers
         self.url = '{}/v2/charges'.format(api_url)
 
-    def get(self, date_from: str = None, date_to: str = None) -> dict:
+    def get(self, date_from: str = None, date_to: str = None) -> list:
         """
         Function to listing charges
         :param date_from: The from date like '2019-07-01'
         :param date_to: The to date like '2019-07-30'
         :return: object json
         """
-        payload = {}
+        params = {}
 
         if date_from:
             date = datetime.strptime(date_from, '%Y-%m-%d')
-            payload['from'] = date.astimezone().isoformat()
+            params['from'] = date.astimezone().isoformat()
 
         if date_to:
             date = datetime.strptime(date_to, '%Y-%m-%d')
-            payload['to'] = date.astimezone().isoformat()
+            params['to'] = date.astimezone().isoformat()
+    
+        if (date_from and date_to and date_to<date_from):
+            return {"message":"From date can not be before To date"}
 
-        r = requests.post(self.url, headers=self.headers, params=payload)
-
+        r = requests.get(self.url, headers=self.headers, params=params)
+    
         return r.json()
