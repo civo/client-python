@@ -38,9 +38,13 @@ def filter_list(data: dict, filter_by: str) -> list:
 
     try:
         for element in data_search:
-            # we check if the search value is a partial match or not
-            if search in element[search_in]:
-                return_list.append(element)
+            # we check if the search value is a partial match or not, check if search is a string or int
+            try:
+                if search in element[search_in]:
+                    return_list.append(element)
+            except TypeError:
+                if search == element[search_in]:
+                    return_list.append(element)
         return return_list
     except KeyError:
         raise KeyError('Invalid filter')
